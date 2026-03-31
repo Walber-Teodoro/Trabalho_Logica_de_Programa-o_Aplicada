@@ -6,7 +6,7 @@ from pygame.font import Font
 
 import random
 
-from code.Const import C_WHITE, WIN_HEIGHT, SPAWN_DELAY, ENEMY_LIST, WIN_WIDTH, C_YELLOW
+from code.Const import C_WHITE, WIN_HEIGHT, SPAWN_DELAY, ENEMY_LIST, WIN_WIDTH, C_YELLOW, C_RED
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
@@ -75,7 +75,7 @@ class Level:
             self.level_text(14, f'{self.name} - Timeout:{self.timeout / 1000 :.1f}s', C_WHITE, (10, 5))
             self.level_text(14, f'fps: {clock.get_fps():.0f}', C_WHITE,(10, WIN_HEIGHT - 35))
             self.level_text(14, f'entidades: {len(self.entity_list)}', C_WHITE,(10, WIN_HEIGHT - 20))
-            self.level_text(20, f'Score: {self.score}', C_YELLOW, (WIN_WIDTH - 150, 10))
+            self.level_text(20, f'Score: {self.score}', C_RED, (WIN_WIDTH - 150, 10))
             pygame.display.flip()
             pass
 
