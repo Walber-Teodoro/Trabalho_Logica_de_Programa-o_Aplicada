@@ -10,6 +10,5 @@ class Enemy(Entity):
 
     def move(self):
         self.rect.x -= self.speed
-        #if self.rect.right <= 0:
-        #    self.rect.left = WIN_WIDTH
-        #pass
+        self.hitbox = self.rect.inflate(10, 10)
+        self.update_hitbox()

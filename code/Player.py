@@ -22,38 +22,40 @@ class Player(Entity):
         self.is_jumping = False
         self.ground_y = position[1]  # Guarda a posição inicial como o "chão"
 
-
-    #def update(self):
-
+    def update_hitbox(self):
+        #ajuste da Hitbox que estava começando nas costas
+        self.hitbox.center = (self.rect.centerx + 50, self.rect.centery)
 
     def move(self):
         pressed_key = pygame.key.get_pressed()
 
+        # 1. Movimentação Horizontal
         if pressed_key[pygame.K_LEFT] and self.rect.left > 0:
-            self.rect.x -= self.speed
+            self.rect.x -= 2  # Ou use self.speed se estiver definido
         if pressed_key[pygame.K_RIGHT] and self.rect.right < WIN_WIDTH:
-            self.rect.x += self.speed
+            self.rect.x += 2
 
-            # Comando do Pulo (Apenas se estiver no chão)
+        # 2. Comando do Pulo
         if pressed_key[pygame.K_UP] and not self.is_jumping:
-              self.vertical_speed = -PLAYER_JUMP_FORCE  # Valor negativo sobe no Pygame
-              self.is_jumping = True
+            self.vertical_speed = -PLAYER_JUMP_FORCE
+            self.is_jumping = True
 
-        # 2. Aplicação da Gravidade
+        # 3. Gravidade e Chão
         self.vertical_speed += GRAVITY
         self.rect.y += self.vertical_speed
 
-            # 3. Verificação de Colisão com o Chão
         if self.rect.y >= self.ground_y:
-           self.rect.y = self.ground_y
-           self.vertical_speed = 0
-           self.is_jumping = False
+            self.rect.y = self.ground_y
+            self.vertical_speed = 0
+            self.is_jumping = False
 
-        # FRAMES DE ANIMAÇÃO DO PERSONAGEM
-        self.frame_index += 0.1  # speed animation
+        self.frame_index += 0.1
         if self.frame_index >= len(self.animation_list):
             self.frame_index = 0
 
+        # O self.surf é o que o Level.py desenha, então mantemos ele aqui
         self.surf = self.animation_list[int(self.frame_index)]
 
-        pass
+        # Ajuste de Hitbox
+        self.hitbox = self.rect.inflate(0, 150)
+        self.update_hitbox()

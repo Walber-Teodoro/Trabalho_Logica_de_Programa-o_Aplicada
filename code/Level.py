@@ -6,7 +6,7 @@ from pygame.font import Font
 
 import random
 
-from code.Const import C_WHITE, WIN_HEIGHT, SPAWN_DELAY, ENEMY_LIST
+from code.Const import C_WHITE, WIN_HEIGHT, SPAWN_DELAY, ENEMY_LIST, WIN_WIDTH, C_YELLOW
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 from code.EntityMediator import EntityMediator
@@ -15,14 +15,16 @@ from code.EntityMediator import EntityMediator
 class Level:
 
     def __init__(self, window, name, menu_option):
+        self.score = 0
         self.spawn_timer = None
-        self.timeout = 20000
+        self.timeout = 60000
         self.window = window
         self.name = name
         self.menu_option = menu_option
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity('Level1Bg'))
-        self.entity_list.append(EntityFactory.get_entity('Player0'))
+        self.player = EntityFactory.get_entity('Player0')
+        self.entity_list.append(self.player)
 
 
     def run(self):
@@ -50,20 +52,32 @@ class Level:
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move()
 
+                # Teste de hitbox
+                # pygame.draw.rect(self.window, (255, 0, 0), ent.hitbox, 2)
+
                 if ent.name in ENEMY_LIST and ent.rect.right < 0:
                     self.entity_list.remove(ent)
+                    self.score += 10
+                    print(f"Pontuação: {self.score}")
+
+            from code.EntityMediator import EntityMediator
+            if  EntityMediator.verify_collision(entity_list=self.entity_list):
+                print("COLISÃO DETECTADA!")
+                pygame.mixer_music.stop()
+                return 'GAME_OVER'
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
             # Printed text
+            time_str = f'{max(0, self.timeout / 1000): .1f}s'
             self.level_text(14, f'{self.name} - Timeout:{self.timeout / 1000 :.1f}s', C_WHITE, (10, 5))
             self.level_text(14, f'fps: {clock.get_fps():.0f}', C_WHITE,(10, WIN_HEIGHT - 35))
             self.level_text(14, f'entidades: {len(self.entity_list)}', C_WHITE,(10, WIN_HEIGHT - 20))
+            self.level_text(20, f'Score: {self.score}', C_YELLOW, (WIN_WIDTH - 150, 10))
             pygame.display.flip()
-            EntityMediator.verify_collision(entity_list=self.entity_list)
-        pass
+            pass
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
         text_font: Font = pygame.font.SysFont(name="Lucida Sans Typewriter", size=text_size)

@@ -1,0 +1,35 @@
+import pygame, sys
+from code.Const import WIN_WIDTH, WIN_HEIGHT, C_RED, C_WHITE
+
+
+class GameOver:
+    def __init__(self, window):
+        self.window = window
+        # Você pode carregar uma imagem de fundo aqui ou usar uma cor sólida
+        self.surf = pygame.Surface((WIN_WIDTH, WIN_HEIGHT))
+        self.surf.fill((0, 0, 0))  # Fundo preto para destaque
+
+    def run(self):
+        pygame.mixer_music.stop()  # Garante que a música da fase pare
+        while True:
+            self.window.blit(self.surf, (0, 0))
+
+            # Textos na tela
+            self.draw_text(60, "GAME OVER", C_RED, (WIN_WIDTH / 2, WIN_HEIGHT / 2 - 50))
+            self.draw_text(20, "Pressione ENTER para o Menu", C_WHITE, (WIN_WIDTH / 2, WIN_HEIGHT / 2 + 50))
+
+            pygame.display.flip()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:  # Tecla Enter
+                        return  # Sai do loop e volta para o Game.py
+
+    def draw_text(self, size, text, color, pos):
+        font = pygame.font.SysFont("Lucida Sans Typewriter", size)
+        text_surf = font.render(text, True, color)
+        text_rect = text_surf.get_rect(center=pos)
+        self.window.blit(text_surf, text_rect)

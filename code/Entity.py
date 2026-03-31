@@ -17,7 +17,13 @@ class Entity(ABC):
         self.rect = self.surf.get_rect(left=position[0], top=position[1])
         self.speed = 0
 
+        self.hitbox = self.rect.inflate(0, 0)
+        self.update_hitbox()
+
     @abstractmethod
     def move(self):
         self.rect.centerx -= 1
         pass
+
+    def update_hitbox(self):
+        self.hitbox.center = self.rect.center
