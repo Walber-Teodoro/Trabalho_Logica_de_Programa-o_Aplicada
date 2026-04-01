@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 from code.Const import WIN_WIDTH, WIN_HEIGHT, MENU_OPTION
 from code.Instructions import Instructions
@@ -15,14 +17,13 @@ class Game:
             menu = Menu(self.window)
             menu_return = menu.run()
 
-            if menu_return == MENU_OPTION[0]:  # Se escolheu NEW GAME
+            if menu_return == MENU_OPTION[0]:
                 level = Level(self.window, 'Level1', menu_return)
                 level_return = level.run()
 
-                # Verifica o retorno do Level
-                if level_return == 'GAME_OVER':
+                if isinstance(level_return, int):
                     game_over = GameOver(self.window)
-                    game_over.run()
+                    game_over.run(level_return)
 
             elif menu_return == MENU_OPTION[1]:  # Menu Score
                 instruction_screen = Instructions(self.window)
@@ -31,4 +32,4 @@ class Game:
 
             elif menu_return == MENU_OPTION[2]:
                 pygame.quit()
-                quit()
+                sys.exit()

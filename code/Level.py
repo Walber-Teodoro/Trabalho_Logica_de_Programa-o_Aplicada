@@ -71,7 +71,7 @@ class Level:
             from code.EntityMediator import EntityMediator
             if  EntityMediator.verify_collision(entity_list=self.entity_list):
                 pygame.mixer_music.stop()
-                return 'GAME_OVER'
+                return self.score
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

@@ -24,6 +24,7 @@ class Menu:
         menu_option = 0
         # play music in menu
         pygame.mixer_music.load("./asset/Menu.ogg")
+        pygame.mixer.music.set_volume(0.5)
         # music in loop
         pygame.mixer_music.play(-1)
         while True:
