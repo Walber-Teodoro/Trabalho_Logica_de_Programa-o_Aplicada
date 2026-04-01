@@ -1,9 +1,9 @@
 import pygame
 from code.Const import WIN_WIDTH, WIN_HEIGHT, MENU_OPTION
+from code.Instructions import Instructions
 from code.Menu import Menu
 from code.Level import Level
-from code.GameOver import GameOver  # 1. Importe a nova classe
-
+from code.GameOver import GameOver
 
 class Game:
     def __init__(self):
@@ -19,13 +19,16 @@ class Game:
                 level = Level(self.window, 'Level1', menu_return)
                 level_return = level.run()
 
-                # 2. Verifique o retorno do Level
+                # Verifica o retorno do Level
                 if level_return == 'GAME_OVER':
                     game_over = GameOver(self.window)
-                    game_over.run()  # Executa a tela de Game Over
-                    # Após o game_over.run() terminar (ao apertar Enter),
-                    # o loop recomeça e volta naturalmente para o Menu.
+                    game_over.run()
 
-            elif menu_return == MENU_OPTION[2]:  # Se escolheu EXIT
+            elif menu_return == MENU_OPTION[1]:  # Menu Score
+                instruction_screen = Instructions(self.window)
+                instruction_screen.show()
+
+
+            elif menu_return == MENU_OPTION[2]:
                 pygame.quit()
                 quit()

@@ -23,7 +23,7 @@ class Player(Entity):
         self.ground_y = position[1]  # Guarda a posição inicial como o "chão"
 
     def update_hitbox(self):
-        #ajuste da Hitbox que estava começando nas costas
+        #ajuste da Hitbox pra ficar no centro do player
         self.hitbox.center = (self.rect.centerx + 50, self.rect.centery)
 
     def move(self):
@@ -53,7 +53,6 @@ class Player(Entity):
         if self.frame_index >= len(self.animation_list):
             self.frame_index = 0
 
-        # O self.surf é o que o Level.py desenha, então mantemos ele aqui
         self.surf = self.animation_list[int(self.frame_index)]
 
         # Ajuste de Hitbox

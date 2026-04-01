@@ -19,10 +19,10 @@ ENTITY_SPEED = {
     "Level1Bg2": 0,
     "Level1Bg3": 3,
     "Level1Bg4": 4,
-    "Enemy0": 4,
-    "Enemy1": 6,
-    "Enemy2": 4,
-    "Enemy3": 6,
+    "Enemy0": 12,
+    "Enemy1": 14,
+    "Enemy2": 16,
+    "Enemy3": 22,
 
 }
 #G
@@ -30,8 +30,8 @@ GRAVITY = 0.8
 #M
 
 MENU_OPTION = (
-        'NEW GAME',
-        'SCORE',
+        'PLAY GAME',
+        'INSTRUCTIONS',
         'EXIT',
 )
 

@@ -31,11 +31,19 @@ class Level:
         pygame.mixer.music.load(f'./asset/{self.name}.ogg')
         pygame.mixer.music.play(-1)
         clock = pygame.time.Clock()
-
+        start_time = pygame.time.get_ticks()
+        total_time = 60000
         self.spawn_timer = 0
 
         while True:
             clock.tick(60)
+
+            tempo_passado = pygame.time.get_ticks() - start_time
+            self.timeout = total_time - tempo_passado
+
+            if self.timeout <= 0:
+                pygame.mixer.music.stop()
+                return 'GAME_OVER'
 
             self.spawn_timer += 1
             if self.spawn_timer >= SPAWN_DELAY:
@@ -53,7 +61,7 @@ class Level:
                 ent.move()
 
                 # Teste de hitbox
-                # pygame.draw.rect(self.window, (255, 0, 0), ent.hitbox, 2)
+                pygame.draw.rect(self.window, (255, 0, 0), ent.hitbox, 2)
 
                 if ent.name in ENEMY_LIST and ent.rect.right < 0:
                     self.entity_list.remove(ent)
@@ -62,7 +70,6 @@ class Level:
 
             from code.EntityMediator import EntityMediator
             if  EntityMediator.verify_collision(entity_list=self.entity_list):
-                print("COLISÃO DETECTADA!")
                 pygame.mixer_music.stop()
                 return 'GAME_OVER'
 
@@ -70,11 +77,13 @@ class Level:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            # Printed text
-            time_str = f'{max(0, self.timeout / 1000): .1f}s'
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.mixer.music.stop()  # Para a música da fase
+                        return 'MENU'
+
             self.level_text(14, f'{self.name} - Timeout:{self.timeout / 1000 :.1f}s', C_WHITE, (10, 5))
             self.level_text(14, f'fps: {clock.get_fps():.0f}', C_WHITE,(10, WIN_HEIGHT - 35))
-            self.level_text(14, f'entidades: {len(self.entity_list)}', C_WHITE,(10, WIN_HEIGHT - 20))
             self.level_text(20, f'Score: {self.score}', C_RED, (WIN_WIDTH - 150, 10))
             pygame.display.flip()
             pass

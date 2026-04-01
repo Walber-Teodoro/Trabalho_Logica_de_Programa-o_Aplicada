@@ -9,7 +9,7 @@ from code.Const import WIN_WIDTH, C_WHITE, MENU_OPTION, C_YELLOW, C_RED
 class Menu:
     def __init__(self, window):
         self.window = window
-        self.surf = pygame.image.load('./asset/Bg.png').convert()
+        self.surf = pygame.image.load('./asset/Bg.png').convert_alpha()
 
         # tamanho da janela
         self.width = 720
