@@ -61,13 +61,11 @@ class Level:
                 ent.move()
 
                 # Teste de hitbox (retirar o # da função abaixo pra ativar)
-
                 # pygame.draw.rect(self.window, (255, 0, 0), ent.hitbox, 2)
 
                 if ent.name in ENEMY_LIST and ent.rect.right < 0:
                     self.entity_list.remove(ent)
                     self.score += 10
-                    print(f"Pontuação: {self.score}")
 
             from code.EntityMediator import EntityMediator
             if  EntityMediator.verify_collision(entity_list=self.entity_list):
