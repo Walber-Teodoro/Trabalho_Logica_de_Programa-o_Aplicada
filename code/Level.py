@@ -61,6 +61,7 @@ class Level:
                 ent.move()
 
                 # Teste de hitbox (retirar o # da função abaixo pra ativar)
+
                 # pygame.draw.rect(self.window, (255, 0, 0), ent.hitbox, 2)
 
                 if ent.name in ENEMY_LIST and ent.rect.right < 0:
