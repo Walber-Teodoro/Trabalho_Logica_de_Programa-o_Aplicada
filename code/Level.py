@@ -60,8 +60,8 @@ class Level:
                 self.window.blit(source=ent.surf, dest=ent.rect)
                 ent.move()
 
-                # Teste de hitbox
-                pygame.draw.rect(self.window, (255, 0, 0), ent.hitbox, 2)
+                # Teste de hitbox (retirar o # da função abaixo pra ativar)
+                # pygame.draw.rect(self.window, (255, 0, 0), ent.hitbox, 2)
 
                 if ent.name in ENEMY_LIST and ent.rect.right < 0:
                     self.entity_list.remove(ent)
