@@ -20,6 +20,6 @@ class EntityMediator:
                 if (isinstance(ent1, Player) and isinstance(ent2, Enemy)) or \
                         (isinstance(ent2, Player) and isinstance(ent1, Enemy)):
 
-                    if ent1.hitbox.colliderect(ent2.hitbox):
+                    if ent1.hitbox.colliderect(ent2.hitbox): #Checagem de colisão da hitbox
                         return True
                     return False

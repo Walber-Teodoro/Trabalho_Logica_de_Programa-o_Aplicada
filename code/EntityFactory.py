@@ -16,8 +16,8 @@ class EntityFactory:
                     list_bg.append(Background(f'Level1Bg{i}', (WIN_WIDTH, 0)))
                 return list_bg
             case 'Player0':
-                return Player('Player', (50, 270))
+                return Player('Player', (50, 270)) # area inicial do jogador
 
             case 'Enemy0' | 'Enemy1' | 'Enemy2' | 'Enemy3':
-                return Enemy(entity_name, (WIN_WIDTH + 50, 365))
+                return Enemy(entity_name, (WIN_WIDTH + 50, 365)) #local de spawn dos inimigos
 

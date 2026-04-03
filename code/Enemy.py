@@ -11,4 +11,4 @@ class Enemy(Entity):
     def move(self):
         self.rect.x -= self.speed
         self.hitbox = self.rect.inflate(10, 10)
-        self.update_hitbox()
+        self.update_hitbox() #ajuste da Hitbox dos inimigos

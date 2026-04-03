@@ -26,4 +26,4 @@ class Entity(ABC):
         pass
 
     def update_hitbox(self):
-        self.hitbox.center = self.rect.center
+        self.hitbox.center = self.rect.center # Ajuste de hitbox

@@ -17,7 +17,7 @@ class Game:
             menu = Menu(self.window)
             menu_return = menu.run()
 
-            if menu_return == MENU_OPTION[0]:
+            if menu_return == MENU_OPTION[0]: # Inicia o jogo
                 level = Level(self.window, 'Level1', menu_return)
                 level_return = level.run()
 
@@ -25,11 +25,11 @@ class Game:
                     game_over = GameOver(self.window)
                     game_over.run(level_return)
 
-            elif menu_return == MENU_OPTION[1]:  # Menu Score
+            elif menu_return == MENU_OPTION[1]:  # Menu de Instruções
                 instruction_screen = Instructions(self.window)
                 instruction_screen.show()
 
 
-            elif menu_return == MENU_OPTION[2]:
+            elif menu_return == MENU_OPTION[2]: #Sair do jogo
                 pygame.quit()
                 sys.exit()

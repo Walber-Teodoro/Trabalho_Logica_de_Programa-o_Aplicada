@@ -29,18 +29,18 @@ class Player(Entity):
     def move(self):
         pressed_key = pygame.key.get_pressed()
 
-        # 1. Movimentação Horizontal
+        # Movimentação Horizontal
         if pressed_key[pygame.K_LEFT] and self.rect.left > 0:
-            self.rect.x -= 2  # Ou use self.speed se estiver definido
+            self.rect.x -= 2
         if pressed_key[pygame.K_RIGHT] and self.rect.right < WIN_WIDTH:
             self.rect.x += 2
 
-        # 2. Comando do Pulo
+        # Comando do Pulo
         if pressed_key[pygame.K_UP] and not self.is_jumping:
             self.vertical_speed = -PLAYER_JUMP_FORCE
             self.is_jumping = True
 
-        # 3. Gravidade e Chão
+        # Gravidade e Chão
         self.vertical_speed += GRAVITY
         self.rect.y += self.vertical_speed
 

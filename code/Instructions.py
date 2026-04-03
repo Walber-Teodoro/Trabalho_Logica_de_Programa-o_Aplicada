@@ -29,6 +29,8 @@ class Instructions:
 
             self.draw_text(35, "COMO JOGAR", C_RED, (WIN_WIDTH / 2, 50))
 
+            #Texto da tela de Instruções
+
             instructions_text = [
                 "Villager Run é um jogo de corrida lateral.",
                 "Objetivo: Evitar os vegetais na tela.",
@@ -49,7 +51,7 @@ class Instructions:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
+                    if event.key == pygame.K_ESCAPE: #retorna pro menu
                         return
             pygame.display.flip()
 

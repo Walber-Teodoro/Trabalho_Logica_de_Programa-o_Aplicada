@@ -5,7 +5,6 @@ from code.Const import WIN_WIDTH, WIN_HEIGHT, C_RED, C_WHITE, C_BLACK, C_YELLOW
 class GameOver:
     def __init__(self, window):
         self.window = window
-        # Você pode carregar uma imagem de fundo aqui ou usar uma cor sólida
         self.surf = pygame.Surface((WIN_WIDTH, WIN_HEIGHT))
         self.surf.fill(C_BLACK)
 
@@ -14,7 +13,7 @@ class GameOver:
         while True:
             self.window.blit(self.surf, (0, 0))
 
-            # Textos na tela
+            # Textos na tela final de Game Over
             self.draw_text(60, "GAME OVER", C_RED, (WIN_WIDTH / 2, WIN_HEIGHT / 2 - 50))
 
             self.draw_text(30, f"PONTUAÇÃO FINAL: {score}", C_YELLOW, (WIN_WIDTH / 2, WIN_HEIGHT / 2))

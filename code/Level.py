@@ -39,18 +39,18 @@ class Level:
             clock.tick(60)
 
             tempo_passado = pygame.time.get_ticks() - start_time
-            self.timeout = total_time - tempo_passado
+            self.timeout = total_time - tempo_passado #passagem do tempo da fase
 
             if self.timeout <= 0:
-                pygame.mixer.music.stop()
+                pygame.mixer.music.stop() #condição de timeout do jogo
                 return 'GAME_OVER'
 
             self.spawn_timer += 1
-            if self.spawn_timer >= SPAWN_DELAY:
+            if self.spawn_timer >= SPAWN_DELAY: #geração de inimigos
 
-                inimigo_sorteado = random.choice(ENEMY_LIST)
+                inimigo_aleatorio = random.choice(ENEMY_LIST)
 
-                novo_inimigo = EntityFactory.get_entity(inimigo_sorteado)
+                novo_inimigo = EntityFactory.get_entity(inimigo_aleatorio)
 
                 self.entity_list.append(novo_inimigo)
 
@@ -71,7 +71,7 @@ class Level:
             from code.EntityMediator import EntityMediator
             if  EntityMediator.verify_collision(entity_list=self.entity_list):
                 pygame.mixer_music.stop()
-                return self.score
+                return self.score   #retorna a pontuação final ao encerrar o jogo
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -79,7 +79,7 @@ class Level:
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
-                        pygame.mixer.music.stop()  # Para a música da fase
+                        pygame.mixer.music.stop()  # Função para retornar ao menu apertando o ESC
                         return 'MENU'
 
             self.level_text(14, f'{self.name} - Timeout:{self.timeout / 1000 :.1f}s', C_WHITE, (10, 5))
